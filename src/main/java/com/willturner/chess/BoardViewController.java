@@ -15,23 +15,26 @@ public class BoardViewController {
     private int columns = 8;
     private Board chessBoard;
 
-    public BoardViewController(Board chessBoard) {
+    public BoardViewController(Board chessBoard) { // Set chess board
         this.chessBoard = chessBoard;
     }
     @FXML
     private void initialize() {
-        for (int columnIndex = 0; columnIndex < columns; columnIndex++) {
+        for (int columnIndex = 0; columnIndex < columns; columnIndex++) { // Iterate over all squares
             for (int rowIndex = 0; rowIndex < rows; rowIndex++) {
                 Pane pane = new Pane();
-                if ((columnIndex + rowIndex) % 2 == 0) {
-                    pane.setStyle("-fx-background-color: #FFFFFF");
-                } else {
-                    pane.setStyle("-fx-background-color: #000000");
-                    pane.setCursor(javafx.scene.Cursor.HAND);
 
-                }
-                if (chessBoard.pieceLocations[columnIndex][rowIndex] instanceof Pawn){
-                    pane.setStyle("-fx-background-color: #FF0000");
+                if (chessBoard.pieceLocations[columnIndex][rowIndex] == null){ // If there is no piece
+                    if ((columnIndex + rowIndex) % 2 == 0) {
+                        pane.setStyle("-fx-background-color: #FFFFFF");
+                    } else {
+                        pane.setStyle("-fx-background-color: #000000");
+                    }
+                } else {
+                    if (chessBoard.pieceLocations[columnIndex][rowIndex] instanceof Pawn){ // If there is a piece
+                        pane.setStyle("-fx-background-color: #FF0000");
+                        pane.setCursor(javafx.scene.Cursor.HAND);
+                    }
                 }
                 gridPane.add(pane, columnIndex, rowIndex);
             }
@@ -48,12 +51,12 @@ public class BoardViewController {
         double cellWidth = width / 8;
         int rowSelected = (int) (y / cellHeight);
         int colSelected = (int) (x / cellWidth);
-        Pane pane = (Pane) getGridPaneNode(colSelected, rowSelected);
-        pane.setStyle("-fx-background-color: #FFFFFF");
-        pane.setCursor(javafx.scene.Cursor.DEFAULT);
 
-        if(chessBoard.pieceLocations[colSelected][rowSelected] != null) {
+        if(chessBoard.pieceLocations[colSelected][rowSelected] != null) { // If clicked on a piece
             System.out.println(chessBoard.pieceLocations[colSelected][rowSelected].getMovementOptions(colSelected, rowSelected));
+            Pane pane = (Pane) getGridPaneNode(colSelected, rowSelected);
+            pane.setStyle("-fx-background-color: #FFFFFF");
+            pane.setCursor(javafx.scene.Cursor.DEFAULT);
         }
     }
 
