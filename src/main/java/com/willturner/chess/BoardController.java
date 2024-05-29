@@ -6,9 +6,30 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
-public class HelloController {
+public class BoardController {
     @FXML
     private GridPane gridPane;
+
+    private int rows = 8;
+    private int columns = 8;
+
+    @FXML
+    private void initialize() {
+        gridPane.requestFocus();
+        for (int columnIndex = 0; columnIndex < columns; columnIndex++) {
+            for (int rowIndex = 0; rowIndex < rows; rowIndex++) {
+                Pane pane = new Pane();
+                if ((columnIndex + rowIndex) % 2 == 0) {
+                    pane.setStyle("-fx-background-color: #FFFFFF");
+                } else {
+                    pane.setStyle("-fx-background-color: #000000");
+                    pane.setCursor(javafx.scene.Cursor.HAND);
+
+                }
+                gridPane.add(pane, columnIndex, rowIndex);
+            }
+        }
+    }
 
     @FXML
     private void handleMouseClick(MouseEvent event) {
@@ -22,6 +43,7 @@ public class HelloController {
         int colSelected = (int) (x / cellWidth);
         Pane pane = (Pane) getGridPaneNode(colSelected, rowSelected);
         pane.setStyle("-fx-background-color: #FFFFFF");
+        pane.setCursor(javafx.scene.Cursor.DEFAULT);
     }
 
     private Node getGridPaneNode(int column, int row) {

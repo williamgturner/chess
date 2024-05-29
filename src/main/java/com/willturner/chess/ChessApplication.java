@@ -7,10 +7,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HelloApplication extends Application {
+public class ChessApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(ChessApplication.class.getResource("board-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 400, 400);
         /*
         stage.widthProperty().addListener((obs, oldValue, newValue) -> {
@@ -23,7 +23,7 @@ public class HelloApplication extends Application {
          */
         stage.minWidthProperty().bind(scene.heightProperty());
         stage.minHeightProperty().bind(scene.widthProperty());
-        stage.setTitle("Hello!");
+        stage.setTitle("Chess");
         stage.setScene(scene);
         stage.show();
     }
