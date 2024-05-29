@@ -1,21 +1,25 @@
 package com.willturner.chess;
 
+import com.willturner.chess.pieces.Pawn;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
-public class BoardController {
+public class BoardViewController {
     @FXML
     private GridPane gridPane;
 
     private int rows = 8;
     private int columns = 8;
+    private Board chessBoard;
 
+    public BoardViewController(Board chessBoard) {
+        this.chessBoard = chessBoard;
+    }
     @FXML
     private void initialize() {
-        gridPane.requestFocus();
         for (int columnIndex = 0; columnIndex < columns; columnIndex++) {
             for (int rowIndex = 0; rowIndex < rows; rowIndex++) {
                 Pane pane = new Pane();
@@ -25,6 +29,9 @@ public class BoardController {
                     pane.setStyle("-fx-background-color: #000000");
                     pane.setCursor(javafx.scene.Cursor.HAND);
 
+                }
+                if (chessBoard.pieceLocations[columnIndex][rowIndex] instanceof Pawn){
+                    pane.setStyle("-fx-background-color: #FF0000");
                 }
                 gridPane.add(pane, columnIndex, rowIndex);
             }
@@ -44,6 +51,10 @@ public class BoardController {
         Pane pane = (Pane) getGridPaneNode(colSelected, rowSelected);
         pane.setStyle("-fx-background-color: #FFFFFF");
         pane.setCursor(javafx.scene.Cursor.DEFAULT);
+
+        if(chessBoard.pieceLocations[colSelected][rowSelected] != null) {
+            System.out.println(chessBoard.pieceLocations[colSelected][rowSelected].getMovementOptions(colSelected, rowSelected));
+        }
     }
 
     private Node getGridPaneNode(int column, int row) {

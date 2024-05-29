@@ -10,17 +10,12 @@ import java.io.IOException;
 public class ChessApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(ChessApplication.class.getResource("board-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 400, 400);
-        /*
-        stage.widthProperty().addListener((obs, oldValue, newValue) -> {
-            stage.setHeight((double) newValue);
-        });
+        Board board = new Board();
+        BoardViewController controller = new BoardViewController(board);
 
-        stage.heightProperty().addListener((obs, oldValue, newValue) -> {
-            stage.setWidth((double) newValue);
-        });
-         */
+        FXMLLoader fxmlLoader = new FXMLLoader(ChessApplication.class.getResource("board-view.fxml"));
+        fxmlLoader.setController(controller);
+        Scene scene = new Scene(fxmlLoader.load(), 400, 400);
         stage.minWidthProperty().bind(scene.heightProperty());
         stage.minHeightProperty().bind(scene.widthProperty());
         stage.setTitle("Chess");

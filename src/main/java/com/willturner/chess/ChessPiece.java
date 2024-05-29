@@ -1,17 +1,13 @@
 package com.willturner.chess;
 
-import javafx.util.Pair;
-
-public class ChessPiece {
-    private String name;
+public abstract class ChessPiece {
     private PieceColour color;
     private int column;
     private int row;
 
-    public ChessPiece(PieceColour color, int column, int row) {
-        this.name = name;
+    public ChessPiece(PieceColour color) {
         this.color = color;
-        this.column = column;
-        this.row = row;
     }
+
+    public abstract int getMovementOptions(int column, int row);
 }
