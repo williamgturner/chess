@@ -13,7 +13,7 @@ public abstract class ChessPiece {
         this.icon = icon;
     }
 
-    public abstract ArrayList<Location> getLegalMoves(int column, int row, Board ChessBoard);
+    public abstract ArrayList<Location> getLegalMoves(Location pieceLocation, Board ChessBoard);
 
     public PieceColour getColor() {return colour;}
     public String getIcon() {return icon;}

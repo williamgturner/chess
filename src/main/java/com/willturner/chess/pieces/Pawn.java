@@ -15,10 +15,12 @@ public class Pawn extends ChessPiece {
     }
 
     @Override
-    public ArrayList<Location> getLegalMoves(int column, int row, Board chessBoard) {
+    public ArrayList<Location> getLegalMoves(Location pieceLocation, Board chessBoard) {
         ArrayList<Location> possibleMoves = new ArrayList<>();
         Location location;
         ChessPiece[][] pieceLocations = chessBoard.getPieceLocations();
+        int column = pieceLocation.getColumn();
+        int row = pieceLocation.getRow();
         int newColumn;
         int newRow;
 
@@ -69,4 +71,6 @@ public class Pawn extends ChessPiece {
         possibleMoves.removeAll(illegalMoves);
         return possibleMoves;
     }
+
+    public String toString(){return "Pawn";}
 }

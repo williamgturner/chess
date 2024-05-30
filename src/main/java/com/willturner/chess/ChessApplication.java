@@ -10,8 +10,8 @@ import java.io.IOException;
 public class ChessApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        Board board = new Board();
-        BoardViewController controller = new BoardViewController(board);
+        GameMaster gameMaster = new GameMaster();
+        BoardViewController controller = new BoardViewController(gameMaster);
 
         FXMLLoader fxmlLoader = new FXMLLoader(ChessApplication.class.getResource("board-view.fxml"));
         fxmlLoader.setController(controller);
