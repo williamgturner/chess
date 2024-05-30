@@ -37,9 +37,9 @@ public class BoardViewController {
                 Label pieceIcon = new Label();
 
                 if ((columnIndex + rowIndex) % 2 == 0) {
-                    pane.setStyle("-fx-background-color: #FFFFFF");
+                    pane.setStyle("-fx-background-color: #C4A484");
                 } else {
-                    pane.setStyle("-fx-background-color: #000000");
+                    pane.setStyle("-fx-background-color: #5C4033");
                 }
                  // If there is a piece
                 if (chessBoard.pieceLocations[columnIndex][rowIndex] instanceof Pawn){ // If there is a pawn
