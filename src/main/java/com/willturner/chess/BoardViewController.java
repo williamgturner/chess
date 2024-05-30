@@ -31,9 +31,14 @@ public class BoardViewController {
                         pane.setStyle("-fx-background-color: #000000");
                     }
                 } else {
-                    if (chessBoard.pieceLocations[columnIndex][rowIndex] instanceof Pawn){ // If there is a piece
-                        pane.setStyle("-fx-background-color: #FF0000");
-                        pane.setCursor(javafx.scene.Cursor.HAND);
+                    if (chessBoard.pieceLocations[columnIndex][rowIndex] instanceof Pawn){ // If there is a pawn
+                        if (chessBoard.pieceLocations[columnIndex][rowIndex].getColor() == PieceColour.WHITE) {
+                            pane.setStyle("-fx-background-color: #FF0000");
+                            pane.setCursor(javafx.scene.Cursor.HAND);
+                        } else {
+                            pane.setStyle("-fx-background-color: #FF9999");
+                            pane.setCursor(javafx.scene.Cursor.HAND);
+                        }
                     }
                 }
                 gridPane.add(pane, columnIndex, rowIndex);

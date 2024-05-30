@@ -1,10 +1,14 @@
 package com.willturner.chess;
 
 public class Location {
-    private int x;
-    private int y;
+    private int column;
+    private int row;
     public Location(int x, int y) {
-        this.x = x;
-        this.y = y;
+        this.column = x;
+        this.row = y;
+    }
+
+    public String toString(){
+        return "Column: " + column + "\nRow: " + row;
     }
 }

@@ -9,5 +9,8 @@ public abstract class ChessPiece {
         this.color = color;
     }
 
-    public abstract int getMovementOptions(int column, int row);
+    public abstract Location getMovementOptions(int column, int row);
+    public PieceColour getColor() {
+        return color;
+    }
 }

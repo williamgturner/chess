@@ -9,8 +9,8 @@ public class Board {
 
     public Board() {
         for (int i = 0; i < columns; i++) {
-            pieceLocations[i][1] = new Pawn(PieceColour.WHITE);
-            pieceLocations[i][6] = new Pawn(PieceColour.BLACK);
+            pieceLocations[i][1] = new Pawn(PieceColour.BLACK);
+            pieceLocations[i][6] = new Pawn(PieceColour.WHITE);
         }
     }
 }
