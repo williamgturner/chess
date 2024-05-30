@@ -1,5 +1,7 @@
 package com.willturner.chess;
 
+import java.util.ArrayList;
+
 public abstract class ChessPiece {
     private PieceColour color;
     private int column;
@@ -9,7 +11,7 @@ public abstract class ChessPiece {
         this.color = color;
     }
 
-    public abstract Location getMovementOptions(int column, int row);
+    public abstract ArrayList<Location> getMovementOptions(int column, int row);
     public PieceColour getColor() {
         return color;
     }

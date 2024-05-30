@@ -9,6 +9,6 @@ public class Location {
     }
 
     public String toString(){
-        return "Column: " + column + "\nRow: " + row;
+        return "Column: " + column + " Row: " + row;
     }
 }

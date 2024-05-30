@@ -18,6 +18,7 @@ public class BoardViewController {
     public BoardViewController(Board chessBoard) { // Set chess board
         this.chessBoard = chessBoard;
     }
+
     @FXML
     private void initialize() {
         for (int columnIndex = 0; columnIndex < columns; columnIndex++) { // Iterate over all squares
@@ -30,7 +31,7 @@ public class BoardViewController {
                     } else {
                         pane.setStyle("-fx-background-color: #000000");
                     }
-                } else {
+                } else { // If there is a piece
                     if (chessBoard.pieceLocations[columnIndex][rowIndex] instanceof Pawn){ // If there is a pawn
                         if (chessBoard.pieceLocations[columnIndex][rowIndex].getColor() == PieceColour.WHITE) {
                             pane.setStyle("-fx-background-color: #FF0000");
