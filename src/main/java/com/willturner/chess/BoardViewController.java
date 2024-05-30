@@ -1,8 +1,11 @@
 package com.willturner.chess;
 
 import com.willturner.chess.pieces.Pawn;
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -34,13 +37,19 @@ public class BoardViewController {
                 } else { // If there is a piece
                     if (chessBoard.pieceLocations[columnIndex][rowIndex] instanceof Pawn){ // If there is a pawn
                         if (chessBoard.pieceLocations[columnIndex][rowIndex].getColor() == PieceColour.WHITE) {
-                            pane.setStyle("-fx-background-color: #FF0000");
+                            //pane.setStyle("-fx-background-color: #FF0000");
                             pane.setCursor(javafx.scene.Cursor.HAND);
                         } else {
-                            pane.setStyle("-fx-background-color: #FF9999");
+                            //pane.setStyle("-fx-background-color: #FF9999");
                             pane.setCursor(javafx.scene.Cursor.HAND);
                         }
                     }
+                    Label pieceIcon = new Label(chessBoard.pieceLocations[columnIndex][rowIndex].getIcon());
+                    pieceIcon.prefWidthProperty().bind(pane.widthProperty());
+                    pieceIcon.prefHeightProperty().bind(pane.heightProperty());
+                    pieceIcon.setStyle("-fx-font-size:40");
+                    pieceIcon.setAlignment(javafx.geometry.Pos.CENTER);
+                    pane.getChildren().add(pieceIcon);
                 }
                 gridPane.add(pane, columnIndex, rowIndex);
             }

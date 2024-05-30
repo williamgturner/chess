@@ -9,10 +9,12 @@ public class Board {
 
     public Board() {
         for (int i = 0; i < columns; i++) {
-            pieceLocations[i][1] = new Pawn(PieceColour.BLACK);
-            pieceLocations[i][6] = new Pawn(PieceColour.WHITE);
+            pieceLocations[i][1] = new Pawn(PieceColour.BLACK, "♟");
+            pieceLocations[i][6] = new Pawn(PieceColour.WHITE, "♙");
         }
-        pieceLocations[1][5] = new Pawn(PieceColour.WHITE);
+        pieceLocations[1][5] = new Pawn(PieceColour.WHITE, "♙");
+        pieceLocations[2][5] = new Pawn(PieceColour.WHITE, "♙");
+        pieceLocations[3][5] = new Pawn(PieceColour.WHITE, "♙");
     }
 
     public ChessPiece[][] getPieceLocations() {return pieceLocations;}

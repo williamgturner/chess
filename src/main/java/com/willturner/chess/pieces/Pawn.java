@@ -8,11 +8,10 @@ import com.willturner.chess.PieceColour;
 import java.util.ArrayList;
 
 public class Pawn extends ChessPiece {
-    private boolean hasMoved;
+    private boolean hasMoved = false;
 
-    public Pawn(PieceColour colour) {
-        super(colour);
-        hasMoved = false;
+    public Pawn(PieceColour colour, String icon) {
+        super(colour, icon);
     }
 
     @Override
@@ -66,6 +65,7 @@ public class Pawn extends ChessPiece {
                 }
             }
         }
+
         possibleMoves.removeAll(illegalMoves);
         return possibleMoves;
     }
