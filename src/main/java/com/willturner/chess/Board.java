@@ -12,5 +12,8 @@ public class Board {
             pieceLocations[i][1] = new Pawn(PieceColour.BLACK);
             pieceLocations[i][6] = new Pawn(PieceColour.WHITE);
         }
+        pieceLocations[1][5] = new Pawn(PieceColour.WHITE);
     }
+
+    public ChessPiece[][] getPieceLocations() {return pieceLocations;}
 }

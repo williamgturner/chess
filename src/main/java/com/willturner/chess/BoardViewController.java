@@ -59,7 +59,7 @@ public class BoardViewController {
         int colSelected = (int) (x / cellWidth);
 
         if(chessBoard.pieceLocations[colSelected][rowSelected] != null) { // If clicked on a piece
-            System.out.println(chessBoard.pieceLocations[colSelected][rowSelected].getMovementOptions(colSelected, rowSelected));
+            System.out.println(chessBoard.pieceLocations[colSelected][rowSelected].getLegalMoves(colSelected, rowSelected, chessBoard));
             Pane pane = (Pane) getGridPaneNode(colSelected, rowSelected);
             pane.setStyle("-fx-background-color: #FFFFFF");
             pane.setCursor(javafx.scene.Cursor.DEFAULT);

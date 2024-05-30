@@ -8,6 +8,9 @@ public class Location {
         this.row = y;
     }
 
+    public int getColumn() {return this.column;}
+    public int getRow() {return this.row;}
+
     public String toString(){
         return "Column: " + column + " Row: " + row;
     }
