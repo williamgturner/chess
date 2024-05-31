@@ -17,22 +17,28 @@ public class GameMaster {
     public ChessPiece getPieceToMove(){return pieceToMove;}
 
     public void movePiece(Location location){
-        if (chessBoard.pieceLocations[location.getColumn()][location.getRow()] != null || movingPiece){
+        if (chessBoard.getPiece(location) != null || movingPiece){
             if (!movingPiece){
                 pieceLocation = location;
                 pieceToMove = chessBoard.getPiece(pieceLocation);
                 movingPiece = true;
+                // System.out.println("wee");
             } else {
                 moveLocation = location;
                 ArrayList<Location> legalMoves;
                 legalMoves = pieceToMove.getLegalMoves(pieceLocation, chessBoard);
                 moveLocation = location;
                 if(legalMoves.contains(moveLocation)){
-                    chessBoard.pieceLocations[pieceLocation.getColumn()][pieceLocation.getRow()].setHasMoved();
-                    chessBoard.pieceLocations[moveLocation.getColumn()][moveLocation.getRow()] = chessBoard.pieceLocations[pieceLocation.getColumn()][pieceLocation.getRow()];
+                    pieceToMove.setHasMoved();
+                    chessBoard.pieceLocations[moveLocation.getColumn()][moveLocation.getRow()] = pieceToMove;
                     chessBoard.pieceLocations[pieceLocation.getColumn()][pieceLocation.getRow()] = null;
+                    // System.out.println("Poo");
                     pieceToMove = null;
                     movingPiece = false;
+                } else if (chessBoard.getPiece(moveLocation) != null && chessBoard.getPiece(moveLocation).getColor() == pieceToMove.getColor()) {
+                    pieceToMove = chessBoard.getPiece(moveLocation);
+                    pieceLocation = moveLocation;
+                    // System.out.println(movingPiece);
                 } else {
                     pieceToMove = null;
                     movingPiece = false;

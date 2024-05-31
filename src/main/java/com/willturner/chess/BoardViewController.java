@@ -1,6 +1,5 @@
 package com.willturner.chess;
 
-import com.willturner.chess.pieces.Pawn;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -8,12 +7,10 @@ import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.StackPane;
 
 import java.util.ArrayList;
 
@@ -73,12 +70,12 @@ public class BoardViewController {
         int colSelected = (int) (x / cellWidth);
 
         Location location = new Location(colSelected, rowSelected);
-        gameMaster.movePiece(location); // call to model view to move piece
-        if (gameMaster.getMovingPiece()){displayMoveOptions(location);} // If moving a piece, display options
-
+        gameMaster.movePiece(location); // call to model to move piece at selected location
         refreshUI();
-        Pane pane = (Pane) getGridPaneNode(colSelected, rowSelected);
-        pane.setCursor(javafx.scene.Cursor.DEFAULT);
+        if (gameMaster.getMovingPiece()){
+            refreshUI(location);}
+        else {refreshUI();}// If moving a piece, display move options
+
     }
 
     private void refreshUI(){
@@ -97,13 +94,20 @@ public class BoardViewController {
                     pane.setCursor(javafx.scene.Cursor.HAND);
                     pieceIcon.setText(chessBoard.pieceLocations[columnIndex][rowIndex].getIcon());
                 } else {
+                    if ((columnIndex + rowIndex) % 2 == 0) {
+                        pane.setStyle("-fx-background-color: #e4ecc7");
+                    } else {
+                        pane.setStyle("-fx-background-color: #68a04f");
+                    }
+                    pane.setCursor(javafx.scene.Cursor.DEFAULT);
                     pieceIcon.setText("");
                 }
             }
         }
     }
 
-    private void displayMoveOptions(Location location){
+    private void refreshUI(Location location){ // Method overloading
+        refreshUI();
         ArrayList<Location> legalMoves;
         legalMoves = gameMaster.getPieceToMove().getLegalMoves(location, chessBoard);
         for (Location legalMove : legalMoves) {
@@ -111,6 +115,7 @@ public class BoardViewController {
             int row = legalMove.getRow();
             Pane pane = (Pane) getGridPaneNode(column, row);
             pane.setStyle("-fx-background-color: #ADD8E6");
+            pane.setCursor(javafx.scene.Cursor.HAND);
         }
     }
 
