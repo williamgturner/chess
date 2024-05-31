@@ -1,6 +1,7 @@
 package com.willturner.chess;
 
 import com.willturner.chess.pieces.Pawn;
+import com.willturner.chess.pieces.Rook;
 
 public class Board {
     private int columns = 8;
@@ -12,7 +13,8 @@ public class Board {
             pieceLocations[i][1] = new Pawn(PieceColour.BLACK, "♟");
             pieceLocations[i][6] = new Pawn(PieceColour.WHITE, "♙");
         }
-        pieceLocations[2][5] = new Pawn(PieceColour.WHITE, "♙");
+        pieceLocations[2][3] = new Rook(PieceColour.WHITE, "♖");
+        pieceLocations[2][4] = new Rook(PieceColour.BLACK, "♜");
         pieceLocations[3][5] = new Pawn(PieceColour.WHITE, "♙");
         pieceLocations[4][5] = new Pawn(PieceColour.WHITE, "♙");
     }

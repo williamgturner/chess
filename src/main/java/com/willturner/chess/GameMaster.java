@@ -16,30 +16,35 @@ public class GameMaster {
 
     public ChessPiece getPieceToMove(){return pieceToMove;}
 
+    /**
+     * Handles logic necessary for moving pieces around the chess board
+     * @param location (x,y) location of square that user has clicked on
+     */
     public void movePiece(Location location){
         if (chessBoard.getPiece(location) != null || movingPiece){
             if (!movingPiece){
                 pieceLocation = location;
                 pieceToMove = chessBoard.getPiece(pieceLocation);
                 movingPiece = true;
-                // System.out.println("wee");
             } else {
                 moveLocation = location;
                 ArrayList<Location> legalMoves;
                 legalMoves = pieceToMove.getLegalMoves(pieceLocation, chessBoard);
-                moveLocation = location;
+                // if move is legal
                 if(legalMoves.contains(moveLocation)){
                     pieceToMove.setHasMoved();
                     chessBoard.pieceLocations[moveLocation.getColumn()][moveLocation.getRow()] = pieceToMove;
                     chessBoard.pieceLocations[pieceLocation.getColumn()][pieceLocation.getRow()] = null;
-                    // System.out.println("Poo");
                     pieceToMove = null;
                     movingPiece = false;
-                } else if (chessBoard.getPiece(moveLocation) != null && chessBoard.getPiece(moveLocation).getColor() == pieceToMove.getColor()) {
+                }
+                // if player selects a different piece to move
+                else if (chessBoard.getPiece(moveLocation) != null && chessBoard.getPiece(moveLocation).getColor() == pieceToMove.getColor()) {
                     pieceToMove = chessBoard.getPiece(moveLocation);
                     pieceLocation = moveLocation;
-                    // System.out.println(movingPiece);
-                } else {
+                }
+                // if player selects an empty, illegal square to move to
+                else {
                     pieceToMove = null;
                     movingPiece = false;
                 }

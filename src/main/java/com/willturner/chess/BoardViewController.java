@@ -28,6 +28,9 @@ public class BoardViewController {
         this.gameMaster = game;
     }
 
+    /**
+     * Initialises the GUI view by constructing and styling chess board
+     */
     @FXML
     private void initialize() {
         for (int columnIndex = 0; columnIndex < columns; columnIndex++) { // Iterate over all squares
@@ -41,10 +44,9 @@ public class BoardViewController {
                     pane.setStyle("-fx-background-color: #68a04f");
                 }
 
-                //pieceIcon.setStyle("-fx-background-color: #00FF00");
                 DoubleProperty fontSize = new SimpleDoubleProperty(40);
-                fontSize.bind(pane.heightProperty());
-                pieceIcon.prefWidthProperty().bind(pane.widthProperty());
+                fontSize.bind(pane.heightProperty()); // Bind font size to window size
+                pieceIcon.prefWidthProperty().bind(pane.widthProperty()); // Force square aspect ratio
                 pieceIcon.prefHeightProperty().bind(pane.heightProperty());
                 pieceIcon.styleProperty().bind(Bindings.concat("-fx-font-size: ", fontSize.asString(), ";"));
                 pieceIcon.setAlignment(Pos.CENTER);
@@ -58,6 +60,11 @@ public class BoardViewController {
         refreshUI();
     }
 
+    /**
+     * Handles mouse click events on chess board by retrieving coordinates and passing
+     * to the GameMaster object for operations
+     * @param event Mouse click event anywhere on scene
+     */
     @FXML
     private void handleMouseClick(MouseEvent event) {
         double x = event.getX();
@@ -71,13 +78,15 @@ public class BoardViewController {
 
         Location location = new Location(colSelected, rowSelected);
         gameMaster.movePiece(location); // call to model to move piece at selected location
-        refreshUI();
-        if (gameMaster.getMovingPiece()){
-            refreshUI(location);}
-        else {refreshUI();}// If moving a piece, display move options
+        refreshUI(); // clear any highlighted squares, update piece positions graphically
+        // display legal moves if player is moving a piece
+        if (gameMaster.getMovingPiece()){refreshUI(location);}
 
     }
 
+    /**
+     * Refreshes the UI to reflect changes in piece location
+     */
     private void refreshUI(){
         for (int columnIndex = 0; columnIndex < columns; columnIndex++) {
             for (int rowIndex = 0; rowIndex < rows; rowIndex++) {
@@ -93,7 +102,7 @@ public class BoardViewController {
                 if (chessBoard.pieceLocations[columnIndex][rowIndex] != null){
                     pane.setCursor(javafx.scene.Cursor.HAND);
                     pieceIcon.setText(chessBoard.pieceLocations[columnIndex][rowIndex].getIcon());
-                } else {
+                } else { // Clears highlighted legal moves of previously selected piece
                     if ((columnIndex + rowIndex) % 2 == 0) {
                         pane.setStyle("-fx-background-color: #e4ecc7");
                     } else {
@@ -106,6 +115,11 @@ public class BoardViewController {
         }
     }
 
+    /**
+     * Method overloading for method refreshUI(), to be called when a user selects a piece
+     * to move. This method displays the legal squares for a piece to move to
+     * @param location the location of the piece to be moved.
+     */
     private void refreshUI(Location location){ // Method overloading
         refreshUI();
         ArrayList<Location> legalMoves;
@@ -119,6 +133,12 @@ public class BoardViewController {
         }
     }
 
+    /**
+     * Retrieve the grid pane node at a specified index
+     * @param column column of grid pane node to find
+     * @param row row of grid pane node to find
+     * @return node at specified index, null if it does not exist
+     */
     private Node getGridPaneNode(int column, int row) {
         for(Node node : gridPane.getChildren()) {
             if (GridPane.getColumnIndex(node) == column && GridPane.getRowIndex(node) == row) {
@@ -128,6 +148,11 @@ public class BoardViewController {
         return null;
     }
 
+    /**
+     * Retrieve the Label child of a specified Pane
+     * @param pane pane to retrieve label from
+     * @return Label child of specified pane, null if it does not exist
+     */
     private Node getPaneLabel(Pane pane){
         for(Node node : pane.getChildren()) {
             if (node instanceof Label){
@@ -136,5 +161,4 @@ public class BoardViewController {
         }
         return null;
     }
-
 }
