@@ -1,6 +1,7 @@
 package com.willturner.chess;
 
 import com.willturner.chess.pieces.Bishop;
+import com.willturner.chess.pieces.Knight;
 import com.willturner.chess.pieces.Pawn;
 import com.willturner.chess.pieces.Rook;
 
@@ -16,7 +17,7 @@ public class Board {
         }
         pieceLocations[2][3] = new Bishop(PieceColour.WHITE, "♗");
         pieceLocations[2][4] = new Rook(PieceColour.BLACK, "♜");
-        pieceLocations[3][5] = new Pawn(PieceColour.WHITE, "♙");
+        pieceLocations[3][5] = new Knight(PieceColour.BLACK, "♞");
         pieceLocations[4][5] = new Pawn(PieceColour.WHITE, "♙");
     }
     public ChessPiece getPiece(Location location){

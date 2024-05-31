@@ -15,7 +15,7 @@ public abstract class ChessPiece {
         this.hasMoved = false;
     }
 
-    public abstract ArrayList<Location> getLegalMoves(Location pieceLocation, Board ChessBoard);
+    public abstract ArrayList<Location> getLegalMoves(Location pieceLocation, Board chessBoard);
 
     public PieceColour getColor() {return colour;}
     public String getIcon() {return icon;}
