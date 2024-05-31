@@ -37,6 +37,9 @@ public class GameMaster {
                     chessBoard.pieceLocations[pieceLocation.getColumn()][pieceLocation.getRow()] = null;
                     pieceToMove = null;
                     movingPiece = false;
+                } else if (chessBoard.getPiece(moveLocation) == pieceToMove) {
+                    pieceToMove = null;
+                    movingPiece = false;
                 }
                 // if player selects a different piece to move
                 else if (chessBoard.getPiece(moveLocation) != null && chessBoard.getPiece(moveLocation).getColor() == pieceToMove.getColor()) {
