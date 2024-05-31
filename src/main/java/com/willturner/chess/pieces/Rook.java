@@ -17,7 +17,6 @@ public class Rook extends ChessPiece {
     public ArrayList<Location> getLegalMoves(Location pieceLocation, Board chessBoard) {
         ArrayList<Location> possibleMoves = new ArrayList<>();
         Location location;
-        ChessPiece[][] pieceLocations = chessBoard.getPieceLocations();
         int column = pieceLocation.getColumn();
         int row = pieceLocation.getRow();
         int newColumn = column + 1;

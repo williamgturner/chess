@@ -17,7 +17,6 @@ public class Knight extends ChessPiece {
     public ArrayList<Location> getLegalMoves(Location pieceLocation, Board chessBoard) {
         ArrayList<Location> possibleMoves = new ArrayList<>();
         Location location;
-        ChessPiece[][] pieceLocations = chessBoard.getPieceLocations();
         int column = pieceLocation.getColumn();
         int row = pieceLocation.getRow();
         int newColumn = column;
@@ -31,6 +30,7 @@ public class Knight extends ChessPiece {
             newRow += rowDeltas[i];
             location = new Location(newColumn, newRow);
             if (newColumn >= 0 && newColumn < 8 && newRow >= 0 && newRow < 8){ // If move location is inside of board bounds
+                // Empty square or opponent piece, then is a valid move
                 if (chessBoard.getPiece(location) == null || chessBoard.getPiece(location).getColor() != this.getColor()){
                     possibleMoves.add(location);
                 }

@@ -17,7 +17,6 @@ public class Bishop extends ChessPiece {
     public ArrayList<Location> getLegalMoves(Location pieceLocation, Board chessBoard) {
         ArrayList<Location> possibleMoves = new ArrayList<>();
         Location location;
-        ChessPiece[][] pieceLocations = chessBoard.getPieceLocations();
         int column = pieceLocation.getColumn();
         int row = pieceLocation.getRow();
         int newColumn = column;
@@ -38,11 +37,12 @@ public class Bishop extends ChessPiece {
                 blocked = true;
             }
         }
+
         newColumn = column;
         newRow = row;
         blocked = false;
         // Diagonal right up
-        while(!blocked && newColumn < 71 && newRow > 0) {
+        while(!blocked && newColumn < 7 && newRow > 0) {
             newColumn++;
             newRow--;
             location = new Location(newColumn, newRow);
@@ -91,7 +91,6 @@ public class Bishop extends ChessPiece {
                 blocked = true;
             }
         }
-
         return possibleMoves;
     }
 }
