@@ -8,7 +8,6 @@ import com.willturner.chess.PieceColour;
 import java.util.ArrayList;
 
 public class Pawn extends ChessPiece {
-    private boolean hasMoved = false;
 
     public Pawn(PieceColour colour, String icon) {
         super(colour, icon);
@@ -24,7 +23,6 @@ public class Pawn extends ChessPiece {
         int newColumn;
         int newRow;
 
-
         if(!hasMoved){ // If pawn has not moved, can move 2 squares forward
             if (getColor().equals(PieceColour.WHITE)) {
                 newColumn = column;
@@ -37,19 +35,27 @@ public class Pawn extends ChessPiece {
         }
 
         if (getColor().equals(PieceColour.WHITE)) { // White moves up the board
-            location = new Location(column, row - 1); // Pawn can always move 1 square forward
-            possibleMoves.add(location);
+            location = new Location(column, row - 1); // Pawn can move 1 square forward
+            if (chessBoard.getPiece(location) == null) {
+                possibleMoves.add(location);
+            }
             location = new Location(column + 1, row - 1); // Diagonal right
-            possibleMoves.add(location);
+            if (chessBoard.getPiece(location) != null && chessBoard.getPiece(location).getColor() == PieceColour.BLACK) {
+                possibleMoves.add(location);}
             location = new Location(column - 1, row - 1); // Diagonal left
-            possibleMoves.add(location);
+            if (chessBoard.getPiece(location) != null && chessBoard.getPiece(location).getColor() == PieceColour.BLACK) {
+                possibleMoves.add(location);}
         } else { // Black moves down the board
             location = new Location(column, row + 1); // Pawn can always move 1 square forward
-            possibleMoves.add(location);
+            if (chessBoard.getPiece(location) == null) {
+                possibleMoves.add(location);
+            }
             location = new Location(column + 1, row + 1); // Diagonal right
-            possibleMoves.add(location);
+            if (chessBoard.getPiece(location) != null && chessBoard.getPiece(location).getColor() == PieceColour.WHITE) {
+                possibleMoves.add(location);}
             location = new Location(column - 1, row + 1); // Diagonal left
-            possibleMoves.add(location);
+            if (chessBoard.getPiece(location) != null &&chessBoard.getPiece(location).getColor() == PieceColour.WHITE) {
+                possibleMoves.add(location);}
         }
 
         ArrayList<Location> illegalMoves = new ArrayList<>();
