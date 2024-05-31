@@ -85,29 +85,25 @@ public class BoardViewController {
     }
 
     /**
-     * Refreshes the UI to reflect changes in piece location
+     * Refreshes the UI to reflect changes in piece location and clear highlighted squares
      */
     private void refreshUI(){
         for (int columnIndex = 0; columnIndex < columns; columnIndex++) {
             for (int rowIndex = 0; rowIndex < rows; rowIndex++) {
                 Pane pane = (Pane) getGridPaneNode(columnIndex, rowIndex);
                 Label pieceIcon = (Label) getPaneLabel(pane);
-                if (!gameMaster.getMovingPiece()){
-                    if ((columnIndex + rowIndex) % 2 == 0) {
-                        pane.setStyle("-fx-background-color: #e4ecc7");
-                    } else {
-                        pane.setStyle("-fx-background-color: #68a04f");
-                    }
+
+                if ((columnIndex + rowIndex) % 2 == 0) { // remove all highlighted squares
+                    pane.setStyle("-fx-background-color: #e4ecc7");
+                } else {
+                    pane.setStyle("-fx-background-color: #68a04f");
                 }
+
+                // update piece positions
                 if (chessBoard.pieceLocations[columnIndex][rowIndex] != null){
                     pane.setCursor(javafx.scene.Cursor.HAND);
                     pieceIcon.setText(chessBoard.pieceLocations[columnIndex][rowIndex].getIcon());
-                } else { // Clears highlighted legal moves of previously selected piece
-                    if ((columnIndex + rowIndex) % 2 == 0) {
-                        pane.setStyle("-fx-background-color: #e4ecc7");
-                    } else {
-                        pane.setStyle("-fx-background-color: #68a04f");
-                    }
+                } else {
                     pane.setCursor(javafx.scene.Cursor.DEFAULT);
                     pieceIcon.setText("");
                 }
