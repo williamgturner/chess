@@ -9,6 +9,7 @@ module com.willturner.chess {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
+    requires java.desktop;
 
     opens com.willturner.chess to javafx.fxml;
     exports com.willturner.chess;
