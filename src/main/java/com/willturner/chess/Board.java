@@ -1,9 +1,6 @@
 package com.willturner.chess;
 
-import com.willturner.chess.pieces.Bishop;
-import com.willturner.chess.pieces.Knight;
-import com.willturner.chess.pieces.Pawn;
-import com.willturner.chess.pieces.Rook;
+import com.willturner.chess.pieces.*;
 
 public class Board {
     private int columns = 8;
@@ -17,6 +14,7 @@ public class Board {
         }
         pieceLocations[2][3] = new Bishop(PieceColour.WHITE, "♗");
         pieceLocations[2][4] = new Rook(PieceColour.BLACK, "♜");
+        pieceLocations[3][4] = new Queen(PieceColour.WHITE, "♕");
         pieceLocations[3][5] = new Knight(PieceColour.BLACK, "♞");
         pieceLocations[4][5] = new Pawn(PieceColour.WHITE, "♙");
     }
