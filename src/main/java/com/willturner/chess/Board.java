@@ -26,5 +26,4 @@ public class Board {
         }
         return null;
     }
-    public ChessPiece[][] getPieceLocations() {return pieceLocations;}
 }

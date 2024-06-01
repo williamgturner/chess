@@ -17,7 +17,6 @@ public class Pawn extends ChessPiece {
     public ArrayList<Location> getLegalMoves(Location pieceLocation, Board chessBoard) {
         ArrayList<Location> possibleMoves = new ArrayList<>();
         Location location;
-        ChessPiece[][] pieceLocations = chessBoard.getPieceLocations();
         int column = pieceLocation.getColumn();
         int row = pieceLocation.getRow();
         int newColumn;
@@ -66,8 +65,8 @@ public class Pawn extends ChessPiece {
             if (newColumn < 0 || newColumn > 7 || newRow < 0 || newRow > 7){ // If move location is outside of board bounds
                 illegalMoves.add(moveLocation);
             } else {
-                if (pieceLocations[newColumn][newRow] != null){ // If move location is occupied
-                    if (pieceLocations[newColumn][newRow].getColor() == getColor()){ // If move location is occupied by same colour
+                if (chessBoard.getPiece(moveLocation) != null){ // If move location is occupied
+                    if (chessBoard.getPiece(moveLocation).getColor() == getColor()){ // If move location is occupied by same colour
                         illegalMoves.add(moveLocation);
                     }
                 }
