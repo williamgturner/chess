@@ -1,5 +1,4 @@
-# Chess
+# FXchess ♟️
 Author: William Turner
 
-A simple chess game created using JavaFX
-## Contents:
+A simple chess game built with javaFX
