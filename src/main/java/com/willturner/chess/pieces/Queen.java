@@ -92,21 +92,11 @@ public class Queen extends ChessPiece {
             }
         }
 
-        while(!blocked && newColumn < 8){ // possible moves right
-            location = new Location(newColumn, newRow);
-            if (chessBoard.getPiece(location) == null){
-                possibleMoves.add(location);
-            } else{
-                if (chessBoard.getPiece(location).getColor() != this.getColor()){
-                    possibleMoves.add(location);
-                }
-                blocked = true;}
-            newColumn++;
-        }
-
+        newColumn = column;
+        newRow = row;
         blocked = false;
-        newColumn = column - 1;
-        while(!blocked && newColumn >= 0){ // possible moves left
+        while(!blocked && newColumn < 7){ // possible moves right
+            newColumn++;
             location = new Location(newColumn, newRow);
             if (chessBoard.getPiece(location) == null){
                 possibleMoves.add(location);
@@ -115,13 +105,13 @@ public class Queen extends ChessPiece {
                     possibleMoves.add(location);
                 }
                 blocked = true;}
-            newColumn--;
         }
 
         blocked = false;
         newColumn = column;
-        newRow = row + 1;
-        while(!blocked && newRow < 8){ // possible moves down
+        newRow = row;
+        while(!blocked && newColumn >= 1){ // possible moves left
+            newColumn--;
             location = new Location(newColumn, newRow);
             if (chessBoard.getPiece(location) == null){
                 possibleMoves.add(location);
@@ -130,12 +120,13 @@ public class Queen extends ChessPiece {
                     possibleMoves.add(location);
                 }
                 blocked = true;}
-            newRow++;
         }
 
         blocked = false;
-        newRow = row - 1;
-        while(!blocked && newRow >= 0){ // possible moves up
+        newColumn = column;
+        newRow = row;
+        while(!blocked && newRow < 7){ // possible moves down
+            newRow++;
             location = new Location(newColumn, newRow);
             if (chessBoard.getPiece(location) == null){
                 possibleMoves.add(location);
@@ -144,7 +135,21 @@ public class Queen extends ChessPiece {
                     possibleMoves.add(location);
                 }
                 blocked = true;}
+        }
+
+        blocked = false;
+        newColumn = column;
+        newRow = row;
+        while(!blocked && newRow >= 1){ // possible moves up
             newRow--;
+            location = new Location(newColumn, newRow);
+            if (chessBoard.getPiece(location) == null){
+                possibleMoves.add(location);
+            } else{
+                if (chessBoard.getPiece(location).getColor() != this.getColor()){
+                    possibleMoves.add(location);
+                }
+                blocked = true;}
         }
         return possibleMoves;
 
