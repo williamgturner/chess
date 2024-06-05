@@ -3,7 +3,6 @@ package com.willturner.chess.pieces;
 import com.willturner.chess.Board;
 import com.willturner.chess.ChessPiece;
 import com.willturner.chess.Location;
-import com.willturner.chess.PieceColour;
 
 import java.util.ArrayList;
 

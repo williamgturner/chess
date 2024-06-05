@@ -13,4 +13,6 @@ module com.willturner.chess {
 
     opens com.willturner.chess to javafx.fxml;
     exports com.willturner.chess;
+    exports com.willturner.chess.pieces;
+    opens com.willturner.chess.pieces to javafx.fxml;
 }

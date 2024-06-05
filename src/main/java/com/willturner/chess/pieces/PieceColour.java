@@ -1,4 +1,4 @@
-package com.willturner.chess;
+package com.willturner.chess.pieces;
 
 public enum PieceColour {
     BLACK,

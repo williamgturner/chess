@@ -1,5 +1,7 @@
 package com.willturner.chess;
 
+import com.willturner.chess.pieces.PieceColour;
+
 import java.util.ArrayList;
 
 public abstract class ChessPiece {

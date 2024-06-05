@@ -1,13 +1,15 @@
 package com.willturner.chess;
 
+import com.willturner.chess.pieces.PieceColour;
+
 import java.util.ArrayList;
 
 public class GameMaster {
     private boolean whiteTurn = true;
+    private boolean movingPiece = false;
     Board chessBoard = new Board();
     private Location pieceLocation;
     private Location moveLocation;
-    private boolean movingPiece = false;
     private ChessPiece pieceToMove = null;
 
     public Board getBoard(){return chessBoard;}
@@ -35,8 +37,10 @@ public class GameMaster {
                     pieceToMove.setHasMoved();
                     chessBoard.pieceLocations[moveLocation.getColumn()][moveLocation.getRow()] = pieceToMove;
                     chessBoard.pieceLocations[pieceLocation.getColumn()][pieceLocation.getRow()] = null;
+                    System.out.println(getThreated(moveLocation, pieceToMove.getColor()));
                     pieceToMove = null;
                     movingPiece = false;
+                // cancel movement if user selects the same piece
                 } else if (chessBoard.getPiece(moveLocation) == pieceToMove) {
                     pieceToMove = null;
                     movingPiece = false;
@@ -53,6 +57,33 @@ public class GameMaster {
                 }
             }
         }
+    }
+
+    /**
+     * Checks if a given location is threated by the given colour
+     * @param location Location of the square to check
+     * @param colour Colour to check if it is threated by
+     * @return true if threated, false otherwise
+     */
+    public boolean getThreated(Location location, PieceColour colour){
+        if (colour == PieceColour.BLACK){
+            colour = PieceColour.WHITE;
+        } else {
+            colour = PieceColour.BLACK;
+        }
+        ArrayList<Location> possibleOpponentMoves = new ArrayList<>();
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                ChessPiece pieceToCheck = chessBoard.getPiece(new Location(i, j));
+                if (pieceToCheck != null && pieceToCheck.getColor() == colour) {
+                    Location pieceLocation = new Location(i, j);
+                    possibleOpponentMoves.addAll(pieceToCheck.getLegalMoves(pieceLocation, chessBoard));
+                }
+            }
+        }
+        if (possibleOpponentMoves.contains(location)) {
+            return true;
+        } return false;
     }
 
 }

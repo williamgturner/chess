@@ -2,11 +2,16 @@ package com.willturner.chess;
 
 import com.willturner.chess.pieces.*;
 
+import java.util.ArrayList;
+
 public class Board {
     private int columns = 8;
     private int rows = 8;
     ChessPiece[][] pieceLocations = new ChessPiece[columns][rows];
 
+    /**
+     * Constructor for class Board, initialises the starting location of chess pieces
+     */
     public Board() {
         for (int i = 0; i < columns; i++) {
             pieceLocations[i][1] = new Pawn(PieceColour.BLACK, "♟");
@@ -30,11 +35,33 @@ public class Board {
         pieceLocations[5][7] = new Bishop(PieceColour.WHITE, "♗");
         pieceLocations[3][7] = new Queen(PieceColour.WHITE, "♕");
     }
+
+    /**
+     * Returns the piece at the specified location on the board
+     * @param location Location to search
+     * @return ChessPiece object, null if there is not one
+     */
     public ChessPiece getPiece(Location location){
         int column = location.getColumn();
         int row = location.getRow();
         if(row >= 0 && row < rows && column >= 0 && column < columns){
             return pieceLocations[column][row];
+        }
+        return null;
+    }
+
+    /**
+     * Returns the location of a given piece
+     * @param piece Piece to find location of
+     * @return Location object of the given piece, null if the piece does not exist
+     */
+    public Location getLocation(ChessPiece piece){
+        for(int i = 0; i < columns; i++){
+            for(int j = 0; j < rows; j++){
+                if(pieceLocations[i][j] == piece){
+                    return new Location(i, j);
+                }
+            }
         }
         return null;
     }

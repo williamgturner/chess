@@ -3,7 +3,6 @@ package com.willturner.chess.pieces;
 import com.willturner.chess.Board;
 import com.willturner.chess.ChessPiece;
 import com.willturner.chess.Location;
-import com.willturner.chess.PieceColour;
 
 import java.util.ArrayList;
 
@@ -13,6 +12,12 @@ public class Pawn extends ChessPiece {
         super(colour, icon);
     }
 
+    /**
+     * Return the legal moves for a pawn following the rules of chess
+     * @param pieceLocation Location of the pawn trying to move
+     * @param chessBoard The state of the board
+     * @return ArrayList of Location objects representing legal moves
+     */
     @Override
     public ArrayList<Location> getLegalMoves(Location pieceLocation, Board chessBoard) {
         ArrayList<Location> possibleMoves = new ArrayList<>();
