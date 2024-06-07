@@ -44,12 +44,24 @@ public class Board {
             colour = PieceColour.BLACK;
         }
         ArrayList<Location> possibleOpponentMoves = new ArrayList<>();
+        ArrayList<Location> pieceMoves;
+        ArrayList<Location> pawnStraightMoves = new ArrayList<>();
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 ChessPiece pieceToCheck = getPiece(new Location(i, j));
                 if (pieceToCheck != null && pieceToCheck.getColor() == colour) {
                     Location pieceLocation = new Location(i, j);
-                    possibleOpponentMoves.addAll(pieceToCheck.getLegalMoves(pieceLocation, this));
+                    pieceMoves = pieceToCheck.getLegalMoves(pieceLocation, this);
+                    if(pieceToCheck instanceof Pawn){
+                        for (Location move : pieceMoves) {
+                            if (move.getColumn() == pieceLocation.getColumn()){
+                                pawnStraightMoves.add(move);
+                            }
+                        }
+                    }
+                    System.out.println(pawnStraightMoves);
+                    pieceMoves.removeAll(pawnStraightMoves);
+                    possibleOpponentMoves.addAll(pieceMoves);
                 }
             }
         }
