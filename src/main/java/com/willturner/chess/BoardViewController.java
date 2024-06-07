@@ -1,5 +1,6 @@
 package com.willturner.chess;
 
+import com.willturner.chess.pieces.King;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;

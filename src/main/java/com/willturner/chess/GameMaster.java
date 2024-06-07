@@ -1,5 +1,6 @@
 package com.willturner.chess;
 
+import com.willturner.chess.pieces.King;
 import com.willturner.chess.pieces.PieceColour;
 
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ public class GameMaster {
                     pieceToMove.setHasMoved();
                     chessBoard.pieceLocations[moveLocation.getColumn()][moveLocation.getRow()] = pieceToMove;
                     chessBoard.pieceLocations[pieceLocation.getColumn()][pieceLocation.getRow()] = null;
-                    System.out.println(getThreated(moveLocation, pieceToMove.getColor()));
+                    //System.out.println(getThreated(moveLocation, pieceToMove.getColor()));
                     pieceToMove = null;
                     movingPiece = false;
                 // cancel movement if user selects the same piece
@@ -61,11 +62,10 @@ public class GameMaster {
 
     /**
      * Checks if a given location is threated by the given colour
-     * @param location Location of the square to check
      * @param colour Colour to check if it is threated by
      * @return true if threated, false otherwise
      */
-    public boolean getThreated(Location location, PieceColour colour){
+    public ArrayList<Location> getThreated(PieceColour colour){
         if (colour == PieceColour.BLACK){
             colour = PieceColour.WHITE;
         } else {
@@ -81,9 +81,8 @@ public class GameMaster {
                 }
             }
         }
-        if (possibleOpponentMoves.contains(location)) {
-            return true;
-        } return false;
+
+        return possibleOpponentMoves;
     }
 
 }

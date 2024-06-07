@@ -34,6 +34,27 @@ public class Board {
         pieceLocations[2][7] = new Bishop(PieceColour.WHITE, "♗");
         pieceLocations[5][7] = new Bishop(PieceColour.WHITE, "♗");
         pieceLocations[3][7] = new Queen(PieceColour.WHITE, "♕");
+        pieceLocations[4][3] = new King(PieceColour.WHITE, "♔");
+    }
+
+    public ArrayList<Location> getThreated(PieceColour colour){
+        if (colour == PieceColour.BLACK){
+            colour = PieceColour.WHITE;
+        } else {
+            colour = PieceColour.BLACK;
+        }
+        ArrayList<Location> possibleOpponentMoves = new ArrayList<>();
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                ChessPiece pieceToCheck = getPiece(new Location(i, j));
+                if (pieceToCheck != null && pieceToCheck.getColor() == colour) {
+                    Location pieceLocation = new Location(i, j);
+                    possibleOpponentMoves.addAll(pieceToCheck.getLegalMoves(pieceLocation, this));
+                }
+            }
+        }
+
+        return possibleOpponentMoves;
     }
 
     /**
