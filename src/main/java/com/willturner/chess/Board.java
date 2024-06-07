@@ -59,7 +59,6 @@ public class Board {
                             }
                         }
                     }
-                    System.out.println(pawnStraightMoves);
                     pieceMoves.removeAll(pawnStraightMoves);
                     possibleOpponentMoves.addAll(pieceMoves);
                 }
